@@ -558,7 +558,8 @@ def get_tokenizer(
     Returns:
         A BPE tokenizer that uses the provided vocab, merges, and special tokens.
     """
-    raise NotImplementedError
+    from gpt.tokenizer import Tokenizer
+    return Tokenizer(vocab, merges, special_tokens)
 
 
 def run_train_bpe(
@@ -583,9 +584,13 @@ def run_train_bpe(
             vocab:
                 The trained tokenizer vocabulary, a mapping from int (token ID in the vocabulary)
                 to bytes (token bytes)
-            merges:
+            merg
                 BPE merges. Each list item is a tuple of bytes (<token1>, <token2>),
                 representing that <token1> was merged with <token2>.
                 Merges are ordered by order of creation.
     """
-    raise NotImplementedError
+    # raise NotImplementedError
+    # from gpt.bpe import train_bpe_fast, train_bpe
+    # return train_bpe_fast(input_path, vocab_size, special_tokens, visualise=None, num_processes=1)
+    from gpt.bpe import train_bpe
+    return train_bpe(input_path, vocab_size, special_tokens, num_workers=8)
