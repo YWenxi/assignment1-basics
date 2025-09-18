@@ -93,6 +93,7 @@ class AdamW(Optimizer):
 class CosineAnnealingScheduler:
     def __init__(
         self, 
+        optimizer: Optimizer,
         max_learning_rate: float, 
         min_learning_rate: float, 
         warmup_iters: int, 
@@ -107,12 +108,14 @@ class CosineAnnealingScheduler:
             warmup_iters (int): Number of warmup iterations.
             cosine_cycle_iters (int): Number of cosine cycle iterations.
         """
+        self.optimizer = optimizer
         self.max_learning_rate = max_learning_rate # alpha_max
         self.min_learning_rate = min_learning_rate # alpha_min
         self.warmup_iters = warmup_iters # T_w
         self.cosine_cycle_iters = cosine_cycle_iters # T_c
         
-    def __call__(self, it):
+    def __call__(self):
+        it = self.optimizer.state["t"]
         return cosine_annealing_scheduler(it, self.max_learning_rate, self.min_learning_rate, self.warmup_iters, self.cosine_cycle_iters)
       
         

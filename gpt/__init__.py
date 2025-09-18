@@ -9,7 +9,8 @@ from .nn import (
 from .nn import (
     linear, silu, softmax, scaled_dot_product_attention
 )
-from .modeling_lm import CausalLM
+from .loss import cross_entropy, perplexity
+from .modeling_lm import CausalLM, all_models
 from .optim import AdamW, CosineAnnealingScheduler, cosine_annealing_scheduler, gradient_clipping
-from .data import get_batch
+from .data import get_batch, LazyDataset
 from .utils import save_checkpoint, load_checkpoint

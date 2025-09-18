@@ -58,8 +58,21 @@ def GPT2_XL():
         d_ff=6400,
         rope_theta=10000.0,
     )
-    
+
+
+def gpt2():
+    return CausalLM(
+        vocab_size=50257,
+        context_length=1024,
+        d_model=768,
+        num_layers=12,
+        num_heads=12,
+        d_ff=3072, # 4 * d_model
+        rope_theta=10000.0,
+    )
+
 
 all_models = {
     "gpt2-xl": GPT2_XL,
+    "gpt2": gpt2,
 }
